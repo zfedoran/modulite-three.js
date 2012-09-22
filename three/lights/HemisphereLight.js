@@ -5,26 +5,6 @@ ml.module('three.lights.HemisphereLight')
           'three.lights.Light')
 .defines(function(){
 
-ml.module('three.lights.HemisphereLight')
-.requires('three.core.Color',
-          'three.core.Vector3',
-          'three.lights.Light',
-          'undefined')
-.defines(function(){
-
-ml.module('three.lights.HemisphereLight')
-.requires('three.core.Color',
-          'three.core.Vector3',
-          'three.lights.Light',
-          'undefined')
-.defines(function(){
-
-ml.module('three.lights.HemisphereLight')
-.requires('three.core.Color',
-          'three.core.Vector3',
-          'three.lights.Light')
-.defines(function(){
-
 /**
  * @author alteredq / http://alteredqualia.com/
  */
@@ -43,11 +23,5 @@ THREE.HemisphereLight = function ( skyColorHex, groundColorHex, intensity ) {
 
 THREE.HemisphereLight.prototype = Object.create( THREE.Light.prototype );
 
-
-});
-
-});
-
-});
 
 });

@@ -2,7 +2,8 @@ ml.module('three.extras.core.Shape')
 .requires('three.Three',
           'three.extras.FontUtils',
           'three.extras.core.Path',
-          'three.extras.geometries.ExtrudeGeometry')
+          'three.extras.geometries.ExtrudeGeometry',
+          'three.extras.geometries.ShapeGeometry')
 .defines(function(){
 
 /**
@@ -31,6 +32,15 @@ THREE.Shape.prototype.extrude = function ( options ) {
 
 	var extruded = new THREE.ExtrudeGeometry( this, options );
 	return extruded;
+
+};
+
+// Convenience method to return ShapeGeometry
+
+THREE.Shape.prototype.makeGeometry = function ( options ) {
+
+	var geometry = new THREE.ShapeGeometry( this, options );
+	return geometry;
 
 };
 

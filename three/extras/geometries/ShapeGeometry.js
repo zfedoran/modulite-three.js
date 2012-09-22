@@ -7,32 +7,6 @@ ml.module('three.extras.geometries.ShapeGeometry')
           'three.extras.geometries.ExtrudeGeometry')
 .defines(function(){
 
-ml.module('three.extras.geometries.ShapeGeometry')
-.requires('three.core.Face3',
-          'three.core.Geometry',
-          'three.core.Vector3',
-          'three.extras.core.Shape',
-          'three.extras.geometries.ExtrudeGeometry',
-          'undefined')
-.defines(function(){
-
-ml.module('three.extras.geometries.ShapeGeometry')
-.requires('three.core.Face3',
-          'three.core.Geometry',
-          'three.core.Vector3',
-          'three.extras.core.Shape',
-          'three.extras.geometries.ExtrudeGeometry',
-          'undefined')
-.defines(function(){
-
-ml.module('three.extras.geometries.ShapeGeometry')
-.requires('three.core.Face3',
-          'three.core.Geometry',
-          'three.core.Vector3',
-          'three.extras.core.Shape',
-          'three.extras.geometries.ExtrudeGeometry')
-.defines(function(){
-
 /**
  * @author jonobr1 / http://jonobr1.com
  *
@@ -169,11 +143,5 @@ THREE.ShapeGeometry.prototype.addShape = function ( shape, options ) {
 
 };
 
-
-});
-
-});
-
-});
 
 });

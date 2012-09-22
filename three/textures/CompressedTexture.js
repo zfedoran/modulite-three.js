@@ -3,20 +3,6 @@ ml.module('three.textures.CompressedTexture')
           'three.textures.Texture')
 .defines(function(){
 
-ml.module('three.textures.CompressedTexture')
-.requires('three.textures.Texture',
-          'undefined')
-.defines(function(){
-
-ml.module('three.textures.CompressedTexture')
-.requires('three.textures.Texture',
-          'undefined')
-.defines(function(){
-
-ml.module('three.textures.CompressedTexture')
-.requires('three.textures.Texture')
-.defines(function(){
-
 /**
  * @author alteredq / http://alteredqualia.com/
  */
@@ -59,11 +45,5 @@ THREE.CompressedTexture.prototype.clone = function () {
 
 };
 
-
-});
-
-});
-
-});
 
 });
