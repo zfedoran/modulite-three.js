@@ -1,7 +1,7 @@
 modulite-threejs
 ================
 
-This sample project shows how to use the lightweight module library modulite.js with three.js
+This sample project shows how to use the lightweight module library <a href="https://github.com/zfedoran/modulite.js">modulite.js</a> with <a href="https://github.com/mrdoob/three.js/">three.js</a>.
 
 Examples
 ========
