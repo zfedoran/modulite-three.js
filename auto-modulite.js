@@ -1,5 +1,6 @@
 /*
  * auto-modulite.js v0.0.1
+ * https://github.com/zfedoran/modulite-threejs
  *
  * Modulite.js is free software: you can redistribute it and/or modify
  * it under the terms of the MIT license.
@@ -12,10 +13,16 @@ var fs = require('fs');
 var exec = require('child_process').exec;
 var pathUtil = require('path');
 
-var namespace = 'THREE';
-
 var args = process.argv.splice(2);
-var libPath = args[0];
+
+if(args.length<1){
+  console.log('\nUsage: node auto-modulite.js <path_to_source>\n');
+  console.log('\t<path_to_source>: The path to the "three.js/src/" directory\n');
+  return;
+}
+
+var pathToSrcDir = args[0];
+var namespace = 'three/';
 
 // regex to remove /**/ style single line comments
 // without double escape: /\/\*/,/\*\//{s/\/\*.*\*\///g}
@@ -35,19 +42,19 @@ var removeCommentsRegex = removeSingleLineComments
 
 // regex to remove all lines which do NOT contain "THREE.<something>"
 // without double escape: /THREE\.[^. ]+/!d
-var onlyLinesWithReferences = '/'+namespace+'\\.[^. ]+/!d';
+var onlyLinesWithReferences = '/THREE\\.[^. ]+/!d';
 
 // regex to keep only the name of the referenced object
 // without double escape: s/^.*THREE\.([a-Z0-9_$]+).*$/\1/
-var onlyReferencedObjectName = 's/^.*'+namespace+'\\.([a-Z0-9_$]+).*$/\\1/';
+var onlyReferencedObjectName = 's/^.*THREE\\.([a-Z0-9_$]+).*$/\\1/';
 
 // regex to remove all lines which do NOT contain "THREE.<something> = "
 // without double escape: /THREE\.[^. ]+\s*=[^=]/!d
-var onlyLinesWithDefines = '/'+namespace+'\\.[^. ]+\\s*=[^=]/!d';
+var onlyLinesWithDefines = '/THREE\\.[^. ]+\\s*=[^=]/!d';
 
 // regex to keep only the name of the defined object
 // without double escape: s/^.*THREE\.([^. ]+)\s*=[^=].*$/\1/
-var onlyDefinedObjectName = 's/^.*'+namespace+'\\.([^. ]+)\\s*=[^=].*$/\\1/';
+var onlyDefinedObjectName = 's/^.*THREE\\.([^. ]+)\\s*=[^=].*$/\\1/';
 
 // map of object names which should be linked manually 
 // (they don't fit the standard patterns)
@@ -56,9 +63,25 @@ var manualRoutes = {
   // FrontSide is also defined in Three.js, so we will use it instead
   // (this choice was random, any other object in Three.js would work too)
   'REVISION':'FrontSide',
+  // All of the Three.js files require the THREE object, to keep our regex 
+  // simple, we can simply map THREE to any object inside the Three.js file
   'THREE':'FrontSide',
+};
+
+// map of objects which should not be included in the list of required objects
+var manualObjectExcludes = {
   //Object3D requires Scene, Scene requires Object3D
-  //'Scene':'Vector3', 
+  'Object3D': {'Scene':1}
+};
+
+// map of patches to apply after processing all the files
+var manualFilePatches = {
+  // The THREE object becomes locally scoped with modulite
+  // We need to make it global again by removing 'var'
+  'Three': [{
+    pattern:'var THREE = THREE ||',
+    patch:'THREE ='
+  }]
 };
 
 function getAllFiles(path, callback) {
@@ -86,9 +109,12 @@ function getAllReferences(path, callback) {
         +';'+ onlyReferencedObjectName;
   var command = 'sed -E -e "'+regex+'" ' + path;
   exec(command, function(err, stdout, stderr) {
-    var results = stdout.trim().split('\n'); 
-    results.push(namespace);
+    var filename = pathUtil.basename(path,'.js');
+    var results = stdout.trim().split('\n');
+    //All Three.js objects require THREE
+    results.push('THREE'); 
     results = removeDuplicatesAndEnforceRoutes(results);
+    results = removeExcludedObjects(filename, results);
     callback(err, results);
   });
 }
@@ -130,8 +156,21 @@ function removeDuplicatesAndEnforceRoutes(arr) {
   return out;
 }
 
+function removeExcludedObjects(filename, arr) {
+  var excluded = manualObjectExcludes[filename];
+  var i, len = arr.length, out = [];
+  for (i = 0; i < len; i++) {
+    var obj = arr[i];
+    if(!excluded || !excluded[obj])
+      out.push(obj);
+  }
+  return out;
+}
+
 function convertPathToModule(path){
-  return path.replace('.js','').replace(/\//g,'.');
+  return path.replace(pathToSrcDir, namespace)
+             .replace('.js','')
+             .replace(/\//g,'.');
 }
 
 function getFileData(path, callback) {
@@ -177,8 +216,20 @@ function findModulePathInLibrary(name, library) {
   }
 }
 
+function applyFilePatches(path, data){
+  var filename = pathUtil.basename(path,'.js');
+  var patches = manualFilePatches[filename];
+  if(patches){
+    for(var i = 0; i<patches.length; i++){
+      var patch = patches[i];
+      data = data.replace(patch.pattern, patch.patch);
+    }
+  }
+  return data;
+}
 
-getAllData(libPath, function(err, library) {
+// All the work is done here
+getAllData(pathToSrcDir, function(err, library) {
   // build list of required paths for each file
   for(var path in library) {
     var module = library[path];
@@ -208,6 +259,8 @@ getAllData(libPath, function(err, library) {
         + (dependencies.length>2?".requires({DEPENDENCIES})\n":'')
         + ".defines(function(){\n\n{DATA}\n\n});";
 
+        data = applyFilePatches(path, data);
+
         template = template.replace('{MODULE}', convertPathToModule(path));
         template = template.replace('{DEPENDENCIES}', dependencies);
         template = template.replace('{DATA}', data);
@@ -218,11 +271,8 @@ getAllData(libPath, function(err, library) {
         });
       });
     };
-
-    // we need to do this inside a for loop with async calls
     closure(path, module);
   }
-
 });
 
 
