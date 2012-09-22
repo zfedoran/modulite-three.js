@@ -1,0 +1,19 @@
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript" src="../modulite.js"></script>
+  <script type="text/javascript">
+    ml.libraryPath('lib/');
+    ml.module('a')
+    .requires(
+      'c',
+      'd.a.a')
+    .defines(function(){
+      console.log('module "a" content');
+    });
+  </script>
+</head>
+<body>
+
+</body>
+</html>
