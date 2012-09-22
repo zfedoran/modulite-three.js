@@ -1,5 +1,6 @@
 ml.module('three.extras.animation.AnimationMorphTarget')
-.requires('three.extras.animation.AnimationHandler')
+.requires('three.Three',
+          'three.extras.animation.AnimationHandler')
 .defines(function(){
 
 /**

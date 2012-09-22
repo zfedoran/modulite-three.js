@@ -1,5 +1,6 @@
 ml.module('three.renderers.renderables.RenderableVertex')
-.requires('three.core.Vector3',
+.requires('three.Three',
+          'three.core.Vector3',
           'three.core.Vector4')
 .defines(function(){
 

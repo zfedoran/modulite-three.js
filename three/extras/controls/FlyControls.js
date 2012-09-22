@@ -1,5 +1,6 @@
 ml.module('three.extras.controls.FlyControls')
-.requires('three.core.Quaternion',
+.requires('three.Three',
+          'three.core.Quaternion',
           'three.core.Vector3')
 .defines(function(){
 

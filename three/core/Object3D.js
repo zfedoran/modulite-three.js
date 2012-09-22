@@ -1,5 +1,6 @@
 ml.module('three.core.Object3D')
-.requires('three.core.Matrix4',
+.requires('three.Three',
+          'three.core.Matrix4',
           'three.core.Quaternion',
           'three.core.Vector3')
 .defines(function(){
@@ -95,18 +96,6 @@ THREE.Object3D.prototype = {
 	translateZ: function ( distance ) {
 
 		this.translate( distance, this._vector.set( 0, 0, 1 ) );
-
-	},
-
-	localToWorld: function ( vector ) {
-
-		return this.matrixWorld.multiplyVector3( vector );
-
-	},
-
-	worldToLocal: function ( vector ) {
-
-		return THREE.Object3D.__m1.getInverse( this.matrixWorld ).multiplyVector3( vector );
 
 	},
 
@@ -225,33 +214,17 @@ THREE.Object3D.prototype = {
 
 	},
 
-	getDescendants: function ( array ) {
-
-		if ( array === undefined ) array = [];
-
-		Array.prototype.push.apply( array, this.children );
-
-		for ( var i = 0, l = this.children.length; i < l; i ++ ) {
-
-			this.children[ i ].getDescendants( array );
-
-		};
-
-		return array;
-
-	},
-
 	updateMatrix: function () {
 
 		this.matrix.setPosition( this.position );
 
-		if ( this.useQuaternion === false )  {
+		if ( this.useQuaternion === true )  {
 
-			this.matrix.setRotationFromEuler( this.rotation, this.eulerOrder );
+			this.matrix.setRotationFromQuaternion( this.quaternion );
 
 		} else {
 
-			this.matrix.setRotationFromQuaternion( this.quaternion );
+			this.matrix.setRotationFromEuler( this.rotation, this.eulerOrder );
 
 		}
 
@@ -272,13 +245,13 @@ THREE.Object3D.prototype = {
 
 		if ( this.matrixWorldNeedsUpdate === true || force === true ) {
 
-			if ( this.parent === undefined ) {
+			if ( this.parent !== undefined ) {
 
-				this.matrixWorld.copy( this.matrix );
+				this.matrixWorld.multiply( this.parent.matrixWorld, this.matrix );
 
 			} else {
 
-				this.matrixWorld.multiply( this.parent.matrixWorld, this.matrix );
+				this.matrixWorld.copy( this.matrix );
 
 			}
 
@@ -295,6 +268,18 @@ THREE.Object3D.prototype = {
 			this.children[ i ].updateMatrixWorld( force );
 
 		}
+
+	},
+
+	worldToLocal: function ( vector ) {
+
+		return THREE.Object3D.__m1.getInverse( this.matrixWorld ).multiplyVector3( vector );
+
+	},
+
+	localToWorld: function ( vector ) {
+
+		return this.matrixWorld.multiplyVector3( vector );
 
 	},
 

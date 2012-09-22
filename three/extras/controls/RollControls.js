@@ -1,5 +1,6 @@
 ml.module('three.extras.controls.RollControls')
-.requires('three.core.Matrix4',
+.requires('three.Three',
+          'three.core.Matrix4',
           'three.core.Vector3')
 .defines(function(){
 

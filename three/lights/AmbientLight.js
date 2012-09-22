@@ -1,5 +1,6 @@
 ml.module('three.lights.AmbientLight')
-.requires('three.lights.Light')
+.requires('three.Three',
+          'three.lights.Light')
 .defines(function(){
 
 /**

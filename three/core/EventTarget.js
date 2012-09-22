@@ -1,4 +1,5 @@
 ml.module('three.core.EventTarget')
+.requires('three.Three')
 .defines(function(){
 
 /**

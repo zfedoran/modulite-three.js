@@ -1,4 +1,5 @@
 ml.module('three.core.UV')
+.requires('three.Three')
 .defines(function(){
 
 /**

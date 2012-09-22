@@ -1,4 +1,5 @@
 ml.module('three.materials.MeshFaceMaterial')
+.requires('three.Three')
 .defines(function(){
 
 /**

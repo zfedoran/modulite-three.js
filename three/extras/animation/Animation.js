@@ -1,5 +1,6 @@
 ml.module('three.extras.animation.Animation')
-.requires('three.core.Quaternion',
+.requires('three.Three',
+          'three.core.Quaternion',
           'three.core.Vector3',
           'three.extras.animation.AnimationHandler',
           'three.objects.Bone')

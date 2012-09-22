@@ -1,5 +1,6 @@
 ml.module('three.extras.core.CurvePath')
-.requires('three.core.Geometry',
+.requires('three.Three',
+          'three.core.Geometry',
           'three.core.Vector2',
           'three.core.Vector3',
           'three.extras.core.Curve')

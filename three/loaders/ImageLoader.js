@@ -1,5 +1,6 @@
 ml.module('three.loaders.ImageLoader')
-.requires('three.core.EventTarget')
+.requires('three.Three',
+          'three.core.EventTarget')
 .defines(function(){
 
 /**

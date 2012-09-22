@@ -1,4 +1,19 @@
 ml.module('three.textures.CompressedTexture')
+.requires('three.Three',
+          'three.textures.Texture')
+.defines(function(){
+
+ml.module('three.textures.CompressedTexture')
+.requires('three.textures.Texture',
+          'undefined')
+.defines(function(){
+
+ml.module('three.textures.CompressedTexture')
+.requires('three.textures.Texture',
+          'undefined')
+.defines(function(){
+
+ml.module('three.textures.CompressedTexture')
 .requires('three.textures.Texture')
 .defines(function(){
 
@@ -44,5 +59,11 @@ THREE.CompressedTexture.prototype.clone = function () {
 
 };
 
+
+});
+
+});
+
+});
 
 });

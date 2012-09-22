@@ -1,5 +1,6 @@
 ml.module('three.extras.GeometryUtils')
-.requires('three.core.Face3',
+.requires('three.Three',
+          'three.core.Face3',
           'three.core.Face4',
           'three.core.Geometry',
           'three.core.Math',
@@ -595,13 +596,13 @@ THREE.GeometryUtils = {
 
 				for ( j = 0, jl = geometry.faceUvs.length; j < jl; j ++ ) {
 
-					faceUvs[ j ].push( geometry.faceUvs[ j ][ i ] );
+					faceUvs[ j ].push( geometry.faceUvs[ j ] );
 
 				}
 
 				for ( j = 0, jl = geometry.faceVertexUvs.length; j < jl; j ++ ) {
 
-					faceVertexUvs[ j ].push( geometry.faceVertexUvs[ j ][ i ] );
+					faceVertexUvs[ j ].push( geometry.faceVertexUvs[ j ] );
 
 				}
 

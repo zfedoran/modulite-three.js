@@ -1,5 +1,6 @@
 ml.module('three.scenes.Fog')
-.requires('three.core.Color')
+.requires('three.Three',
+          'three.core.Color')
 .defines(function(){
 
 /**

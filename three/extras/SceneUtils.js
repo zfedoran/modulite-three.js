@@ -1,5 +1,6 @@
 ml.module('three.extras.SceneUtils')
-.requires('three.core.Matrix4',
+.requires('three.Three',
+          'three.core.Matrix4',
           'three.core.Object3D',
           'three.core.Vector3',
           'three.objects.LOD',
@@ -80,7 +81,7 @@ THREE.SceneUtils = {
 
 		} else if ( source instanceof THREE.SkinnedMesh ) {
 
-			object = new THREE.SkinnedMesh( source.geometry, source.material, source.useVertexTexture );
+			object = new THREE.SkinnedMesh( source.geometry, source.material );
 
 		} else if ( source instanceof THREE.Mesh ) {
 

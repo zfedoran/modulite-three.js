@@ -1,4 +1,5 @@
 ml.module('three.core.Rectangle')
+.requires('three.Three')
 .defines(function(){
 
 /**

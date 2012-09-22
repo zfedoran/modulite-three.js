@@ -1,5 +1,6 @@
 ml.module('three.extras.controls.OrbitControls')
-.requires('three.core.EventTarget',
+.requires('three.Three',
+          'three.core.EventTarget',
           'three.core.Vector2',
           'three.core.Vector3')
 .defines(function(){

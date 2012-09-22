@@ -349,31 +349,31 @@ THREE.GeometryLoader.prototype = {
 					var shader = THREE.ShaderUtils.lib[ "normal" ];
 					var uniforms = THREE.UniformsUtils.clone( shader.uniforms );
 
-					uniforms[ "tNormal" ].value = mpars.normalMap;
+					uniforms[ "tNormal" ].texture = mpars.normalMap;
 
 					if ( m.mapNormalFactor ) {
 
-						uniforms[ "uNormalScale" ].value.set( m.mapNormalFactor, m.mapNormalFactor );
+						uniforms[ "uNormalScale" ].value = m.mapNormalFactor;
 
 					}
 
 					if ( mpars.map ) {
 
-						uniforms[ "tDiffuse" ].value = mpars.map;
+						uniforms[ "tDiffuse" ].texture = mpars.map;
 						uniforms[ "enableDiffuse" ].value = true;
 
 					}
 
 					if ( mpars.specularMap ) {
 
-						uniforms[ "tSpecular" ].value = mpars.specularMap;
+						uniforms[ "tSpecular" ].texture = mpars.specularMap;
 						uniforms[ "enableSpecular" ].value = true;
 
 					}
 
 					if ( mpars.lightMap ) {
 
-						uniforms[ "tAO" ].value = mpars.lightMap;
+						uniforms[ "tAO" ].texture = mpars.lightMap;
 						uniforms[ "enableAO" ].value = true;
 
 					}

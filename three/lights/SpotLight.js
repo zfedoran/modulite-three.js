@@ -1,5 +1,6 @@
 ml.module('three.lights.SpotLight')
-.requires('three.core.Object3D',
+.requires('three.Three',
+          'three.core.Object3D',
           'three.core.Vector3',
           'three.lights.Light')
 .defines(function(){

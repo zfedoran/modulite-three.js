@@ -1,5 +1,6 @@
 ml.module('three.extras.animation.KeyFrameAnimation')
-.requires('three.extras.animation.AnimationHandler',
+.requires('three.Three',
+          'three.extras.animation.AnimationHandler',
           'three.objects.Bone')
 .defines(function(){
 

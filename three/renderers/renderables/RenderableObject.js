@@ -1,4 +1,5 @@
 ml.module('three.renderers.renderables.RenderableObject')
+.requires('three.Three')
 .defines(function(){
 
 /**

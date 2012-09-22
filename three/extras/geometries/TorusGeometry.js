@@ -1,5 +1,6 @@
 ml.module('three.extras.geometries.TorusGeometry')
-.requires('three.core.Face4',
+.requires('three.Three',
+          'three.core.Face4',
           'three.core.Geometry',
           'three.core.UV',
           'three.core.Vector3')

@@ -1,5 +1,6 @@
 ml.module('three.objects.ParticleSystem')
-.requires('three.core.Object3D',
+.requires('three.Three',
+          'three.core.Object3D',
           'three.materials.ParticleBasicMaterial')
 .defines(function(){
 

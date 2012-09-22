@@ -1,5 +1,6 @@
 ml.module('three.extras.objects.MorphBlendMesh')
-.requires('three.core.Math',
+.requires('three.Three',
+          'three.core.Math',
           'three.objects.Mesh')
 .defines(function(){
 

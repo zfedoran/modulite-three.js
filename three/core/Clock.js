@@ -1,4 +1,5 @@
 ml.module('three.core.Clock')
+.requires('three.Three')
 .defines(function(){
 
 /**

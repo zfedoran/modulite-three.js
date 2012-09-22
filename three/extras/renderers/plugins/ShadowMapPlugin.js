@@ -27,7 +27,7 @@ THREE.ShadowMapPlugin = function ( ) {
 
 	var _gl,
 	_renderer,
-	_depthMaterial, _depthMaterialMorph, _depthMaterialSkin, _depthMaterialMorphSkin,
+	_depthMaterial, _depthMaterialMorph, _depthMaterialSkin,
 
 	_frustum = new THREE.Frustum(),
 	_projScreenMatrix = new THREE.Matrix4(),
@@ -46,12 +46,10 @@ THREE.ShadowMapPlugin = function ( ) {
 		_depthMaterial = new THREE.ShaderMaterial( { fragmentShader: depthShader.fragmentShader, vertexShader: depthShader.vertexShader, uniforms: depthUniforms } );
 		_depthMaterialMorph = new THREE.ShaderMaterial( { fragmentShader: depthShader.fragmentShader, vertexShader: depthShader.vertexShader, uniforms: depthUniforms, morphTargets: true } );
 		_depthMaterialSkin = new THREE.ShaderMaterial( { fragmentShader: depthShader.fragmentShader, vertexShader: depthShader.vertexShader, uniforms: depthUniforms, skinning: true } );
-		_depthMaterialMorphSkin = new THREE.ShaderMaterial( { fragmentShader: depthShader.fragmentShader, vertexShader: depthShader.vertexShader, uniforms: depthUniforms, morphTargets: true, skinning: true } );
 
 		_depthMaterial._shadowPass = true;
 		_depthMaterialMorph._shadowPass = true;
 		_depthMaterialSkin._shadowPass = true;
-		_depthMaterialMorphSkin._shadowPass = true;
 
 	};
 
@@ -83,7 +81,6 @@ THREE.ShadowMapPlugin = function ( ) {
 		_gl.disable( _gl.BLEND );
 
 		_gl.enable( _gl.CULL_FACE );
-		_gl.frontFace( _gl.CCW );
 
 		if ( _renderer.shadowMapCullFrontFaces ) {
 
@@ -215,7 +212,7 @@ THREE.ShadowMapPlugin = function ( ) {
 
 			shadowCamera.matrixWorldInverse.getInverse( shadowCamera.matrixWorld );
 
-			if ( light.cameraHelper ) light.cameraHelper.visible = light.shadowCameraVisible;
+			if ( light.cameraHelper ) light.cameraHelper.lines.visible = light.shadowCameraVisible;
 			if ( light.shadowCameraVisible ) light.cameraHelper.update();
 
 			// compute shadow matrix
@@ -287,13 +284,13 @@ THREE.ShadowMapPlugin = function ( ) {
 
 						material = object.customDepthMaterial;
 
-					} else if ( object instanceof THREE.SkinnedMesh ) {
-
-						material = object.geometry.morphTargets.length ? _depthMaterialMorphSkin : _depthMaterialSkin;
-
 					} else if ( object.geometry.morphTargets.length ) {
 
 						material = _depthMaterialMorph;
+
+					} else if ( object instanceof THREE.SkinnedMesh ) {
+
+						material = _depthMaterialSkin;
 
 					} else {
 

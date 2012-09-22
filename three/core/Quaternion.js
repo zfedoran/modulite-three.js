@@ -1,4 +1,5 @@
 ml.module('three.core.Quaternion')
+.requires('three.Three')
 .defines(function(){
 
 /**

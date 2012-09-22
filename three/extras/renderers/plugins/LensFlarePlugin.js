@@ -1,5 +1,6 @@
 ml.module('three.extras.renderers.plugins.LensFlarePlugin')
-.requires('three.core.Vector2',
+.requires('three.Three',
+          'three.core.Vector2',
           'three.core.Vector3',
           'three.extras.shaders.ShaderFlares')
 .defines(function(){

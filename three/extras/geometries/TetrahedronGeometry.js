@@ -1,5 +1,6 @@
 ml.module('three.extras.geometries.TetrahedronGeometry')
-.requires('three.core.Geometry',
+.requires('three.Three',
+          'three.core.Geometry',
           'three.extras.geometries.PolyhedronGeometry')
 .defines(function(){
 

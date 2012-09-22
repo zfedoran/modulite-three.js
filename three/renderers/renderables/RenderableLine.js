@@ -1,5 +1,6 @@
 ml.module('three.renderers.renderables.RenderableLine')
-.requires('three.renderers.renderables.RenderableVertex')
+.requires('three.Three',
+          'three.renderers.renderables.RenderableVertex')
 .defines(function(){
 
 /**

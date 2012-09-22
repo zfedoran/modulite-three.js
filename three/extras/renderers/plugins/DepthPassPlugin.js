@@ -1,5 +1,6 @@
 ml.module('three.extras.renderers.plugins.DepthPassPlugin')
-.requires('three.core.BufferGeometry',
+.requires('three.Three',
+          'three.core.BufferGeometry',
           'three.core.Frustum',
           'three.core.Matrix4',
           'three.materials.ShaderMaterial',

@@ -1,4 +1,5 @@
 ml.module('three.core.Vector2')
+.requires('three.Three')
 .defines(function(){
 
 /**

@@ -1,5 +1,6 @@
 ml.module('three.extras.helpers.ArrowHelper')
-.requires('three.core.Geometry',
+.requires('three.Three',
+          'three.core.Geometry',
           'three.core.Matrix4',
           'three.core.Object3D',
           'three.core.Vector3',

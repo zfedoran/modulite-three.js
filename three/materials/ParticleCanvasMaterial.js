@@ -1,5 +1,6 @@
 ml.module('three.materials.ParticleCanvasMaterial')
-.requires('three.core.Color',
+.requires('three.Three',
+          'three.core.Color',
           'three.materials.Material')
 .defines(function(){
 

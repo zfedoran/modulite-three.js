@@ -1,5 +1,6 @@
 ml.module('three.extras.controls.FirstPersonControls')
-.requires('three.core.Math',
+.requires('three.Three',
+          'three.core.Math',
           'three.core.Vector3')
 .defines(function(){
 

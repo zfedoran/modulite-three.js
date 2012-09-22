@@ -1,5 +1,6 @@
 ml.module('three.extras.core.Curve')
-.requires('three.core.Vector2',
+.requires('three.Three',
+          'three.core.Vector2',
           'three.core.Vector3',
           'three.extras.core.Shape')
 .defines(function(){

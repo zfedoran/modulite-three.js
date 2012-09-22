@@ -1,3 +1,35 @@
+ml.module('three.README.md')
+.requires('three.Three',
+          'three.cameras.PerspectiveCamera',
+          'three.extras.geometries.CubeGeometry',
+          'three.materials.MeshBasicMaterial',
+          'three.objects.Mesh',
+          'three.renderers.CanvasRenderer',
+          'three.scenes.Scene')
+.defines(function(){
+
+ml.module('three.README.md')
+.requires('three.Three',
+          'three.cameras.PerspectiveCamera',
+          'three.extras.geometries.CubeGeometry',
+          'three.materials.MeshBasicMaterial',
+          'three.objects.Mesh',
+          'three.renderers.CanvasRenderer',
+          'three.scenes.Scene',
+          'undefined')
+.defines(function(){
+
+ml.module('three.README.md')
+.requires('three.Three',
+          'three.cameras.PerspectiveCamera',
+          'three.extras.geometries.CubeGeometry',
+          'three.materials.MeshBasicMaterial',
+          'three.objects.Mesh',
+          'three.renderers.CanvasRenderer',
+          'three.scenes.Scene',
+          'undefined')
+.defines(function(){
+
 three.js
 ========
 
@@ -664,3 +696,10 @@ This code creates a scene, then creates a camera, adds the camera and cube to th
 2010 04 24 - **r1** (15.25 KB)
 
 * First alpha release
+
+
+});
+
+});
+
+});

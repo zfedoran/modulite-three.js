@@ -1,5 +1,6 @@
 ml.module('three.extras.FontUtils')
-.requires('three.extras.core.Path',
+.requires('three.Three',
+          'three.extras.core.Path',
           'three.extras.core.Shape')
 .defines(function(){
 

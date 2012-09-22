@@ -1,4 +1,5 @@
 ml.module('three.core.Math')
+.requires('three.Three')
 .defines(function(){
 
 /**

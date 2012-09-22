@@ -1,5 +1,6 @@
 ml.module('three.core.Spline')
-.requires('three.core.Vector3')
+.requires('three.Three',
+          'three.core.Vector3')
 .defines(function(){
 
 /**

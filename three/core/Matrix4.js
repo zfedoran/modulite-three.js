@@ -1,5 +1,6 @@
 ml.module('three.core.Matrix4')
-.requires('three.core.Quaternion',
+.requires('three.Three',
+          'three.core.Quaternion',
           'three.core.Vector3',
           'three.core.Vector4')
 .defines(function(){

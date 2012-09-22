@@ -1,4 +1,5 @@
 ml.module('three.extras.shaders.ShaderSprite')
+.requires('three.Three')
 .defines(function(){
 
 /**

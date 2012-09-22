@@ -1,5 +1,6 @@
 ml.module('three.lights.PointLight')
-.requires('three.core.Vector3',
+.requires('three.Three',
+          'three.core.Vector3',
           'three.lights.Light')
 .defines(function(){
 

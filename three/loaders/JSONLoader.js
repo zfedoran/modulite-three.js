@@ -1,5 +1,6 @@
 ml.module('three.loaders.JSONLoader')
-.requires('three.core.Color',
+.requires('three.Three',
+          'three.core.Color',
           'three.core.Face3',
           'three.core.Face4',
           'three.core.Geometry',
@@ -91,6 +92,8 @@ THREE.JSONLoader.prototype.loadAjaxJSON = function ( context, url, callback, tex
 	};
 
 	xhr.open( "GET", url, true );
+	if ( xhr.overrideMimeType ) xhr.overrideMimeType( "text/plain; charset=x-user-defined" );
+	xhr.setRequestHeader( "Content-Type", "text/plain" );
 	xhr.send( null );
 
 };

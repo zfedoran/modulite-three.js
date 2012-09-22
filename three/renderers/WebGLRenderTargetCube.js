@@ -1,5 +1,6 @@
 ml.module('three.renderers.WebGLRenderTargetCube')
-.requires('three.renderers.WebGLRenderTarget')
+.requires('three.Three',
+          'three.renderers.WebGLRenderTarget')
 .defines(function(){
 
 /**

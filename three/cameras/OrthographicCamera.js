@@ -1,5 +1,6 @@
 ml.module('three.cameras.OrthographicCamera')
-.requires('three.cameras.Camera')
+.requires('three.Three',
+          'three.cameras.Camera')
 .defines(function(){
 
 /**

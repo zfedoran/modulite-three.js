@@ -1,5 +1,6 @@
 ml.module('three.objects.Mesh')
-.requires('three.core.Object3D',
+.requires('three.Three',
+          'three.core.Object3D',
           'three.materials.MeshBasicMaterial')
 .defines(function(){
 

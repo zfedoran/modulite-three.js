@@ -1,5 +1,6 @@
 ml.module('three.cameras.PerspectiveCamera')
-.requires('three.cameras.Camera')
+.requires('three.Three',
+          'three.cameras.Camera')
 .defines(function(){
 
 /**
@@ -32,7 +33,7 @@ THREE.PerspectiveCamera.prototype = Object.create( THREE.Camera.prototype );
 
 THREE.PerspectiveCamera.prototype.setLens = function ( focalLength, frameHeight ) {
 
-	if ( frameHeight === undefined ) frameHeight = 24;
+	frameHeight = frameHeight !== undefined ? frameHeight : 24;
 
 	this.fov = 2 * Math.atan( frameHeight / ( focalLength * 2 ) ) * ( 180 / Math.PI );
 	this.updateProjectionMatrix();

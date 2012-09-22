@@ -1,5 +1,6 @@
 ml.module('three.extras.cameras.CombinedCamera')
-.requires('three.cameras.Camera',
+.requires('three.Three',
+          'three.cameras.Camera',
           'three.cameras.OrthographicCamera',
           'three.cameras.PerspectiveCamera')
 .defines(function(){
@@ -158,7 +159,7 @@ THREE.CombinedCamera.prototype.updateProjectionMatrix = function() {
 */
 THREE.CombinedCamera.prototype.setLens = function ( focalLength, frameHeight ) {
 
-	if ( frameHeight === undefined ) frameHeight = 24;
+	frameHeight = frameHeight !== undefined ? frameHeight : 24;
 
 	var fov = 2 * Math.atan( frameHeight / ( focalLength * 2 ) ) * ( 180 / Math.PI );
 

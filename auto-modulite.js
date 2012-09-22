@@ -56,6 +56,7 @@ var manualRoutes = {
   // FrontSide is also defined in Three.js, so we will use it instead
   // (this choice was random, any other object in Three.js would work too)
   'REVISION':'FrontSide',
+  'THREE':'FrontSide',
   //Object3D requires Scene, Scene requires Object3D
   //'Scene':'Vector3', 
 };
@@ -86,6 +87,7 @@ function getAllReferences(path, callback) {
   var command = 'sed -E -e "'+regex+'" ' + path;
   exec(command, function(err, stdout, stderr) {
     var results = stdout.trim().split('\n'); 
+    results.push(namespace);
     results = removeDuplicatesAndEnforceRoutes(results);
     callback(err, results);
   });
@@ -214,7 +216,6 @@ getAllData(libPath, function(err, library) {
           if (err) throw err;
           console.log('saved: '+path);
         });
-        console.log(template);
       });
     };
 

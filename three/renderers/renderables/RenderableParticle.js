@@ -1,5 +1,6 @@
 ml.module('three.renderers.renderables.RenderableParticle')
-.requires('three.core.Vector2')
+.requires('three.Three',
+          'three.core.Vector2')
 .defines(function(){
 
 /**

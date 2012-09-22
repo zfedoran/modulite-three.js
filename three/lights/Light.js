@@ -1,5 +1,6 @@
 ml.module('three.lights.Light')
-.requires('three.core.Color',
+.requires('three.Three',
+          'three.core.Color',
           'three.core.Object3D')
 .defines(function(){
 

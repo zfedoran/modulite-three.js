@@ -1,5 +1,6 @@
 ml.module('three.extras.renderers.plugins.SpritePlugin')
-.requires('three.extras.shaders.ShaderSprite')
+.requires('three.Three',
+          'three.extras.shaders.ShaderSprite')
 .defines(function(){
 
 /**

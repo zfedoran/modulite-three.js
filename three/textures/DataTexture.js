@@ -1,5 +1,6 @@
 ml.module('three.textures.DataTexture')
-.requires('three.textures.Texture')
+.requires('three.Three',
+          'three.textures.Texture')
 .defines(function(){
 
 /**

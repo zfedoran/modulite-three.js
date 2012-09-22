@@ -1,6 +1,5 @@
 ml.module('three.loaders.Loader')
 .requires('three.Three',
-          'three.extras.ImageUtils',
           'three.extras.ShaderUtils',
           'three.materials.ShaderMaterial',
           'three.renderers.WebGLShaders',
@@ -152,25 +151,11 @@ THREE.Loader.prototype = {
 
 		}
 
-		function create_texture( where, name, sourceFile, repeat, offset, wrap, anisotropy ) {
+		function create_texture( where, name, sourceFile, repeat, offset, wrap ) {
 
-			var isCompressed = sourceFile.toLowerCase().endsWith( ".dds" );
-			var fullPath = texturePath + "/" + sourceFile;
+			var texture = document.createElement( 'canvas' );
 
-			if ( isCompressed ) {
-
-				var texture = THREE.ImageUtils.loadCompressedTexture( fullPath );
-
-				where[ name ] = texture;
-
-			} else {
-
-				var texture = document.createElement( 'canvas' );
-
-				where[ name ] = new THREE.Texture( texture );
-
-			}
-
+			where[ name ] = new THREE.Texture( texture );
 			where[ name ].sourceFile = sourceFile;
 
 			if( repeat ) {
@@ -200,17 +185,7 @@ THREE.Loader.prototype = {
 
 			}
 
-			if ( anisotropy ) {
-
-				where[ name ].anisotropy = anisotropy;
-
-			}
-
-			if ( ! isCompressed ) {
-
-				load_image( where[ name ], fullPath );
-
-			}
+			load_image( where[ name ], texturePath + "/" + sourceFile );
 
 		}
 
@@ -286,7 +261,7 @@ THREE.Loader.prototype = {
 
 		if ( m.vertexColors !== undefined ) {
 
-			if ( m.vertexColors === "face" ) {
+			if ( m.vertexColors == "face" ) {
 
 				mpars.vertexColors = THREE.FaceColors;
 
@@ -340,39 +315,31 @@ THREE.Loader.prototype = {
 
 		if ( m.mapDiffuse && texturePath ) {
 
-			create_texture( mpars, "map", m.mapDiffuse, m.mapDiffuseRepeat, m.mapDiffuseOffset, m.mapDiffuseWrap, m.mapDiffuseAnisotropy );
+			create_texture( mpars, "map", m.mapDiffuse, m.mapDiffuseRepeat, m.mapDiffuseOffset, m.mapDiffuseWrap );
 
 		}
 
 		if ( m.mapLight && texturePath ) {
 
-			create_texture( mpars, "lightMap", m.mapLight, m.mapLightRepeat, m.mapLightOffset, m.mapLightWrap, m.mapLightAnisotropy );
+			create_texture( mpars, "lightMap", m.mapLight, m.mapLightRepeat, m.mapLightOffset, m.mapLightWrap );
 
 		}
 
 		if ( m.mapBump && texturePath ) {
 
-			create_texture( mpars, "bumpMap", m.mapBump, m.mapBumpRepeat, m.mapBumpOffset, m.mapBumpWrap, m.mapBumpAnisotropy );
+			create_texture( mpars, "bumpMap", m.mapBump, m.mapBumpRepeat, m.mapBumpOffset, m.mapBumpWrap );
 
 		}
 
 		if ( m.mapNormal && texturePath ) {
 
-			create_texture( mpars, "normalMap", m.mapNormal, m.mapNormalRepeat, m.mapNormalOffset, m.mapNormalWrap, m.mapNormalAnisotropy );
+			create_texture( mpars, "normalMap", m.mapNormal, m.mapNormalRepeat, m.mapNormalOffset, m.mapNormalWrap );
 
 		}
 
 		if ( m.mapSpecular && texturePath ) {
 
-			create_texture( mpars, "specularMap", m.mapSpecular, m.mapSpecularRepeat, m.mapSpecularOffset, m.mapSpecularWrap, m.mapSpecularAnisotropy );
-
-		}
-
-		//
-
-		if ( m.mapBumpScale ) {
-
-			mpars.bumpScale = m.mapBumpScale;
+			create_texture( mpars, "specularMap", m.mapSpecular, m.mapSpecularRepeat, m.mapSpecularOffset, m.mapSpecularWrap );
 
 		}
 
@@ -383,31 +350,31 @@ THREE.Loader.prototype = {
 			var shader = THREE.ShaderUtils.lib[ "normal" ];
 			var uniforms = THREE.UniformsUtils.clone( shader.uniforms );
 
-			uniforms[ "tNormal" ].value = mpars.normalMap;
+			uniforms[ "tNormal" ].texture = mpars.normalMap;
 
 			if ( m.mapNormalFactor ) {
 
-				uniforms[ "uNormalScale" ].value.set( m.mapNormalFactor, m.mapNormalFactor );
+				uniforms[ "uNormalScale" ].value = m.mapNormalFactor;
 
 			}
 
 			if ( mpars.map ) {
 
-				uniforms[ "tDiffuse" ].value = mpars.map;
+				uniforms[ "tDiffuse" ].texture = mpars.map;
 				uniforms[ "enableDiffuse" ].value = true;
 
 			}
 
 			if ( mpars.specularMap ) {
 
-				uniforms[ "tSpecular" ].value = mpars.specularMap;
+				uniforms[ "tSpecular" ].texture = mpars.specularMap;
 				uniforms[ "enableSpecular" ].value = true;
 
 			}
 
 			if ( mpars.lightMap ) {
 
-				uniforms[ "tAO" ].value = mpars.lightMap;
+				uniforms[ "tAO" ].texture = mpars.lightMap;
 				uniforms[ "enableAO" ].value = true;
 
 			}

@@ -1,5 +1,6 @@
 ml.module('three.core.Vertex')
-.requires('three.core.Vector3')
+.requires('three.Three',
+          'three.core.Vector3')
 .defines(function(){
 
 /**

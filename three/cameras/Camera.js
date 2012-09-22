@@ -1,5 +1,6 @@
 ml.module('three.cameras.Camera')
-.requires('three.core.Matrix4',
+.requires('three.Three',
+          'three.core.Matrix4',
           'three.core.Object3D')
 .defines(function(){
 

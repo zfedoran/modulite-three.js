@@ -1,5 +1,6 @@
 ml.module('three.extras.controls.PathControls')
-.requires('three.core.Geometry',
+.requires('three.Three',
+          'three.core.Geometry',
           'three.core.Math',
           'three.core.Object3D',
           'three.core.Spline',

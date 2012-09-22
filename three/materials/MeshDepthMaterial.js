@@ -1,5 +1,6 @@
 ml.module('three.materials.MeshDepthMaterial')
-.requires('three.materials.LineBasicMaterial',
+.requires('three.Three',
+          'three.materials.LineBasicMaterial',
           'three.materials.Material')
 .defines(function(){
 

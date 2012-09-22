@@ -1,5 +1,6 @@
 ml.module('three.core.BufferGeometry')
-.requires('three.core.Geometry',
+.requires('three.Three',
+          'three.core.Geometry',
           'three.core.Matrix4',
           'three.core.Vector3')
 .defines(function(){

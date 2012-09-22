@@ -1,5 +1,6 @@
 ml.module('three.materials.LineBasicMaterial')
-.requires('three.core.Color',
+.requires('three.Three',
+          'three.core.Color',
           'three.materials.Material')
 .defines(function(){
 

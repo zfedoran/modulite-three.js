@@ -1,5 +1,6 @@
 ml.module('three.extras.geometries.SphereGeometry')
-.requires('three.core.Face3',
+.requires('three.Three',
+          'three.core.Face3',
           'three.core.Face4',
           'three.core.Geometry',
           'three.core.UV',

@@ -1,5 +1,6 @@
 ml.module('three.extras.animation.AnimationHandler')
-.requires('three.core.Quaternion',
+.requires('three.Three',
+          'three.core.Quaternion',
           'three.objects.SkinnedMesh')
 .defines(function(){
 

@@ -1,5 +1,6 @@
 ml.module('three.objects.Line')
-.requires('three.core.Object3D',
+.requires('three.Three',
+          'three.core.Object3D',
           'three.materials.LineBasicMaterial')
 .defines(function(){
 

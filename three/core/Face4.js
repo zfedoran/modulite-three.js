@@ -1,5 +1,6 @@
 ml.module('three.core.Face4')
-.requires('three.core.Color',
+.requires('three.Three',
+          'three.core.Color',
           'three.core.Vector3')
 .defines(function(){
 

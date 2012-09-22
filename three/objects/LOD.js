@@ -1,5 +1,6 @@
 ml.module('three.objects.LOD')
-.requires('three.core.Object3D')
+.requires('three.Three',
+          'three.core.Object3D')
 .defines(function(){
 
 /**

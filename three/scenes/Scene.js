@@ -1,5 +1,6 @@
 ml.module('three.scenes.Scene')
-.requires('three.cameras.Camera',
+.requires('three.Three',
+          'three.cameras.Camera',
           'three.core.Object3D',
           'three.lights.Light',
           'three.objects.Bone')
