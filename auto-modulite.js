@@ -1,3 +1,13 @@
+/*
+ * auto-modulite.js v0.0.1
+ *
+ * Modulite.js is free software: you can redistribute it and/or modify
+ * it under the terms of the MIT license.
+ *
+ * Copyright (C) 2012 - Zelimir Fedoran
+ *
+ */
+
 var fs = require('fs');
 var exec = require('child_process').exec;
 var pathUtil = require('path');
