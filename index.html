@@ -51,28 +51,28 @@
 		<script type="text/javascript" src="modulite/modulite.js"></script>
 		<script>
 
-			ml.module('demo')
-			.requires(
-			  'js.Detector',
-			  'js.ImprovedNoise',
-			  'js.Stats',
-				'three.Three',
-        'three.core.Clock',
-        'three.core.Geometry',
-        'three.core.Vector3',
-        'three.cameras.PerspectiveCamera',
-        'three.extras.GeometryUtils',
-        'three.extras.controls.FirstPersonControls',
-        'three.extras.geometries.CubeGeometry',
-        'three.lights.AmbientLight',
-        'three.lights.DirectionalLight',
-        'three.materials.MeshFaceMaterial',
-        'three.materials.MeshLambertMaterial',
-        'three.objects.Mesh',
-        'three.renderers.WebGLRenderer',
-        'three.scenes.Scene',
-        'three.scenes.FogExp2')
-			.defines(function(){
+				ml.module('demo')
+				.requires(
+					'js.Detector',
+					'js.ImprovedNoise',
+					'js.Stats',
+					'three.Three',
+					'three.core.Clock',
+					'three.core.Geometry',
+					'three.core.Vector3',
+					'three.cameras.PerspectiveCamera',
+					'three.extras.GeometryUtils',
+					'three.extras.controls.FirstPersonControls',
+					'three.extras.geometries.CubeGeometry',
+					'three.lights.AmbientLight',
+					'three.lights.DirectionalLight',
+					'three.materials.MeshFaceMaterial',
+					'three.materials.MeshLambertMaterial',
+					'three.objects.Mesh',
+					'three.renderers.WebGLRenderer',
+					'three.scenes.Scene',
+					'three.scenes.FogExp2')
+				.defines(function(){
 
 				if ( ! Detector.webgl ) {
 
