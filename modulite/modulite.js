@@ -100,7 +100,7 @@
   // dependencies.
   modulite.bakeCurrentStackString = function(){
     var output = '';
-    for (var i = _callbackStack.length - 1; i >= 0; i--) {
+    for (var i = 0; i < _callbackStack.length; i++) {
       var string = _callbackStack[i].toString();
       if(!string)
         throw('Error! This browser does not support function.toString().');
