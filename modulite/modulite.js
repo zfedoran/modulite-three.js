@@ -1,5 +1,5 @@
 /*
- * Modulite.js v0.0.2
+ * Modulite.js v0.0.3
  * http://github.com/zfedoran/modulite.js
  *
  * Modulite.js is free software: you can redistribute it and/or modify
@@ -13,7 +13,7 @@
 
   // Base modulite object
   var modulite = root.modulite = root.ml = {
-    version : '0.0.2',
+    version : '0.0.3',
   };
 
   // Base library path for modules, set this using the public function
@@ -91,10 +91,32 @@
   }
 
   // Get a list of all executed module callbacks sorted by dependencies.
-  // This is supplied for debugging purposes, but it can be used to minify
-  // the applicaiton into a single Javascript file.
+  // This is supplied for debugging purposes.
   modulite.getCallbackStack = function(){
     return _callbackStack;
+  }
+
+  // Bake all currently loaded modules into a single string, sorted by
+  // dependencies.
+  modulite.bakeCurrentStackString = function(){
+    var output = '';
+    for (var i = _callbackStack.length - 1; i >= 0; i--) {
+      var string = _callbackStack[i].toString();
+      if(!string)
+        throw('Error! This browser does not support function.toString().');
+      output += '\n';
+      output += string.substring(string.indexOf('{') + 1, string.lastIndexOf('}'));
+    }
+    return output;
+  }
+
+  // Bake all currently loaded modules into a single string, sorted by
+  // dependencies and redirect the browser to the result.
+  // If you are using IE8 and have more than 32kb of data, use 
+  // modulite.bakeCurrentStackString() instead of this function.
+  modulite.bakeCurrentStack = function(){
+    var output = this.bakeCurrentStackString();
+    location.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(output);
   }
 
   // This function does most of the hard work in determining which modules to 
