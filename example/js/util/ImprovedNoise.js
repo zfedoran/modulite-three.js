@@ -1,6 +1,6 @@
 // http://mrl.nyu.edu/~perlin/noise/
 
-ml.module('js.ImprovedNoise')
+ml.module('util.ImprovedNoise')
 .defines(function(){
 
 	ImprovedNoise = function () {

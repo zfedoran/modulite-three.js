@@ -1,0 +1,45 @@
+body {
+  color: #61443e;
+  font-family:Monospace;
+  font-size:13px;
+  background-color: #fff;
+  margin: 0px;
+  overflow: hidden;
+}
+
+a { color: #a06851; }
+
+#container {
+  text-align: right;
+}
+
+#info {
+  position: absolute;
+  top: 0px; width: 100%;
+  right: 0px;
+  padding: 5px;
+  text-align:right;
+}
+
+#modulite {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding:10px;
+  height: 15%;
+  font-size: 11px;
+  text-align: left;
+  overflow: hidden;
+}
+
+#modulite span {
+  color: #a06851;
+}
+
+#modulite div {
+  opacity:1;
+   transition: opacity 1s;
+  -moz-transition: opacity 1s; /* Firefox 4 */
+  -webkit-transition: opacity 1s; /* Safari and Chrome */
+  -o-transition: opacity 1s; /* Opera */ 
+}

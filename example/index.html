@@ -2,22 +2,41 @@
 <html lang="en">
 	<head>
 		<title>three.js modulite.js minecraft sample</title>
-		<link rel="stylesheet" type="text/css" href="main.css">
+		<link rel="stylesheet" type="text/css" href="styles/main.css">
 		<script type="text/javascript" src="js/modulite.js"></script>
 		<script type="text/javascript">
+      var removeLoadedModuleName = function(){
+        var el = document.getElementById('modulite');
+        el.lastChild.style.opacity = 0;
+        setTimeout(function(){
+          el.removeChild(el.lastChild);
+        }, 1000);
+        if(el.lastChild){
+          setTimeout(removeLoadedModuleName, 1000);
+        }
+      }
       var addLoadedModuleNameToDOM = function(moduleName){
         var el = document.getElementById('modulite');
         var div = document.createElement('div');
-        div.innerText = 'loaded [' + moduleName + ']';
-        el.appendChild(div);
+        div.innerHTML = '<span>[' + moduleName + ']</span> was loaded successfully...';
+        if(el.firstChild)
+          el.insertBefore(div, el.firstChild);
+        else
+          el.appendChild(div);
+        el.scrollTop = el.scrollHeight;
       };
       ml.on('execute', addLoadedModuleNameToDOM);
+      ml.config({
+        'three' : 'js/threejs/src/',
+        'util'  : 'js/util/'
+      });
+      setTimeout(removeLoadedModuleName, 5000);
     </script>
 		<script type="text/javascript" src="js/webgl_geometry_minecraft_ao.js"></script>
 	</head>
 	<body>
-		<div id="container"><br /><br /><br /><br /><br />Generating world...</div>
-		<div id="modulite"></div>
+		<div id="container"><br /><br /><br /><br />Generating world...</div>
+    <div id="modulite"></div>
 		<div id="info">
 			<a href="http://github.com/mrdoob/three.js" target="_blank">three.js</a> -
 			<a href="https://github.com/zfedoran/modulite.js" target="_blank">modulite.js</a> - 

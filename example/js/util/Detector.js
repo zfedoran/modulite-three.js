@@ -3,7 +3,7 @@
  * @author mr.doob / http://mrdoob.com/
  */
 
-ml.module('js.Detector')
+ml.module('util.Detector')
 .defines(function(){
 
 	Detector = {

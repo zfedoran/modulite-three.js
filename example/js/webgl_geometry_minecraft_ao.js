@@ -1,8 +1,8 @@
 ml.module('webgl_geometry_minecraft_ao')
 .requires(
-  'js.Detector',
-  'js.ImprovedNoise',
-  'js.Stats',
+  'util.Detector',
+  'util.ImprovedNoise',
+  'util.Stats',
   'three.Three',
   'three.core.Clock',
   'three.core.Geometry',
@@ -426,7 +426,8 @@ ml.module('webgl_geometry_minecraft_ao')
 
     stats = new Stats();
     stats.domElement.style.position = 'absolute';
-    stats.domElement.style.top = '0px';
+    stats.domElement.style.bottom = '0px';
+    stats.domElement.style.right = '0px';
     container.appendChild( stats.domElement );
 
     window.addEventListener( 'resize', onWindowResize, false );

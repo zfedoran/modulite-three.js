@@ -1,5 +1,5 @@
 /*
- * Modulite.js v0.0.4
+ * Modulite.js v0.0.5
  * http://github.com/zfedoran/modulite.js
  *
  * Modulite.js is free software: you can redistribute it and/or modify
@@ -13,11 +13,11 @@
 
   // Base modulite object
   var modulite = root.modulite = root.ml = {
-    version : '0.0.4',
+    version : '0.0.5',
   };
 
   // Base library path for modules, set this using the public function
-  var _basePath = ''
+  var _pathLibrary = {}
     
     // Modules which have been required but not yet added to the DOM
     , _currentlyLoading = {}
@@ -45,9 +45,14 @@
         'module': [], 'requires': [], 'defines': [], 'execute': []
     };
 
-  // This function sets the base library path for all of your modules
-  modulite.libraryPath = function(path){
-    _basePath = path;
+  // This function allows you to configure paths to smaller namespaces
+  // example:
+  //   ml.config({ 
+  //       'three' : 'public/javascripts/thirdparty/three.js/src/',
+  //       'game'  : 'public/javascripts/game/' 
+  //   });
+  modulite.config = function(paths){
+      _pathLibrary = paths;
     return this;
   }
 
@@ -139,6 +144,7 @@
     if (!eventList)
       throw('Error: Unresolved event name');
     eventList.push({ callback:callback, context:context });
+    return this;
   }
 
   // Remove a bound function from a modulite event
@@ -153,6 +159,7 @@
         delete eventList[key];
       }
     }
+    return this;
   }
 
   // This function will trigger all bound callbacks for an event
@@ -219,7 +226,15 @@
     if(_currentlyLoading[name])
       return;
 
-    var path = _basePath + name.replace(/\./g, '/') + '.js';
+    var path = name;
+    var basePath = '';
+    var namespace = name.match(/^[^.]*/)[0];
+    if(namespace && _pathLibrary[namespace]){
+      basePath = _pathLibrary[namespace];
+      path = path.replace(/^[^.]*\./,'');
+    }
+
+    path = basePath + path.replace(/\./g, '/') + '.js';
     _numWaitingOnDefLoad++;
     _currentlyLoading[name] = path;
     _loadScript({ 
