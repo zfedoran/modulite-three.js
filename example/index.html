@@ -4,10 +4,20 @@
 		<title>three.js modulite.js minecraft sample</title>
 		<link rel="stylesheet" type="text/css" href="main.css">
 		<script type="text/javascript" src="js/modulite.js"></script>
+		<script type="text/javascript">
+      var addLoadedModuleNameToDOM = function(moduleName){
+        var el = document.getElementById('modulite');
+        var div = document.createElement('div');
+        div.innerText = 'loaded [' + moduleName + ']';
+        el.appendChild(div);
+      };
+      ml.on('execute', addLoadedModuleNameToDOM);
+    </script>
 		<script type="text/javascript" src="js/webgl_geometry_minecraft_ao.js"></script>
 	</head>
 	<body>
 		<div id="container"><br /><br /><br /><br /><br />Generating world...</div>
+		<div id="modulite"></div>
 		<div id="info">
 			<a href="http://github.com/mrdoob/three.js" target="_blank">three.js</a> -
 			<a href="https://github.com/zfedoran/modulite.js" target="_blank">modulite.js</a> - 

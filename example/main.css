@@ -9,7 +9,9 @@ body {
   margin: 0px;
   overflow: hidden;
 }
+
 a { color: #a06851; }
+
 #info {
   position: absolute;
   top: 0px; width: 100%;
@@ -21,4 +23,17 @@ a { color: #a06851; }
   color:#fff !important;
   margin-top:10em !important;
 }
+
 #oldie a { color:#fff }
+
+#modulite {
+  position: fixed;
+  top: 0px;
+  background: #fff;
+  height:100%;
+  color:#555;
+  font-size:11px;
+  text-align:left;
+  overflow-y:scroll;
+  overflow-x:hidden;
+}
