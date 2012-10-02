@@ -1,5 +1,5 @@
 /*
- * Modulite.js v0.0.3
+ * Modulite.js v0.0.4
  * http://github.com/zfedoran/modulite.js
  *
  * Modulite.js is free software: you can redistribute it and/or modify
@@ -13,7 +13,7 @@
 
   // Base modulite object
   var modulite = root.modulite = root.ml = {
-    version : '0.0.3',
+    version : '0.0.4',
   };
 
   // Base library path for modules, set this using the public function
@@ -38,7 +38,12 @@
     , _currentModuleDef = null
 
     // A list of all executed module callbacks sorted by order of dependencies
-    , _callbackStack = [];
+    , _callbackStack = []
+    
+    // A list of events that can be bound to using modulite.on()
+    , _events = {
+        'module': [], 'requires': [], 'defines': [], 'execute': []
+    };
 
   // This function sets the base library path for all of your modules
   modulite.libraryPath = function(path){
@@ -53,6 +58,9 @@
         + '" does not call defines()');
 
     _currentModuleDef = { name : name, dependencies : {}, callback : null };
+
+    // Call any assigned callbacks
+    _triggerEvents('module', _currentModuleDef.name);
     return this;
   }
 
@@ -62,6 +70,9 @@
       throw('Error: Must call module() before calling requires()');
 
     _currentModuleDef.dependencies = Array.prototype.slice.call(arguments);
+
+    // Call any assigned callbacks
+    _triggerEvents('requires', _currentModuleDef.name);
     return this;
   }
 
@@ -74,6 +85,9 @@
     _currentModuleDef.callback = callback;
     _loadedModuleDefinitions[_currentModuleDef.name] = _currentModuleDef;
     
+    // Call any assigned callbacks
+    _triggerEvents('defines', _currentModuleDef.name);
+    
     // This function would only be called once the module has been added to
     // the DOM. Once the script tag has been added, we are no longer loading
     // this module. It has finished loading. However, it still needs to be
@@ -84,7 +98,7 @@
     _numWaitingToExecute++;
     
     _currentModuleDef = null;
-    
+
     // Check if we can load or execute any modules at this time
     _resolveDependencies();
     return this;
@@ -119,6 +133,40 @@
     location.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(output);
   }
 
+  // Bind a function to a modulite event
+  modulite.on = function(eventName, callback, context){
+    var eventList = _events[eventName];
+    if (!eventList)
+      throw('Error: Unresolved event name');
+    eventList.push({ callback:callback, context:context });
+  }
+
+  // Remove a bound function from a modulite event
+  modulite.off = function(eventName, callback, context){
+    var eventList = _events[eventName];
+    if (!eventList)
+      throw('Error: Unresolved event name');
+    for (var key in eventList){
+      var currentEvent = eventList[key];
+      if (currentEvent.callback == callback 
+          && currentEvent.context == context) {
+        delete eventList[key];
+      }
+    }
+  }
+
+  // This function will trigger all bound callbacks for an event
+  function _triggerEvents(eventName){
+    var eventList = _events[eventName];
+    if (!eventList)
+      throw('Error: Unresolved event name');
+    for (var key in eventList){
+      var currentEvent = eventList[key];
+      var args = Array.prototype.slice.call(arguments,1);
+      currentEvent.callback.apply(currentEvent.context, args);
+    }
+  }
+  
   // This function does most of the hard work in determining which modules to 
   // load and execute. It will throw an error if no modules are being waited
   // on but not all modules have been executed.
@@ -150,6 +198,9 @@
         _executeModule(module);
         wereAnyModulesLoaded = true; 
         _numWaitingToExecute--;       
+
+        // Call any assigned callbacks
+        _triggerEvents('execute', moduleName);
       }
     }
 
@@ -158,7 +209,7 @@
     if(wereAnyModulesLoaded){
       _resolveDependencies();      
     } else if(_numWaitingOnDefLoad == 0 && _numWaitingToExecute > 0) {
-        throw('Error: Unresolved module reference (circular dependencies?)');
+      throw('Error: Unresolved module reference (circular dependencies?)');
     }
   }
 
@@ -220,3 +271,7 @@
 
   return modulite;
 })(this);
+
+
+
+
