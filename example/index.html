@@ -1,48 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>three.js modulite.js minecraft sample</title>
-		<link rel="stylesheet" type="text/css" href="styles/main.css">
-		<script type="text/javascript" src="js/modulite.js"></script>
-		<script type="text/javascript">
+  <head>
+    <title>three.js modulite.js minecraft sample</title>
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
+    <script type="text/javascript" src="js/modulite.js"></script>
+    <script type="text/javascript">
+      // remove old log entires
       var removeLoadedModuleName = function(){
         var el = document.getElementById('modulite');
-        el.lastChild.style.opacity = 0;
-        setTimeout(function(){
-          el.removeChild(el.lastChild);
-        }, 1000);
-        if(el.lastChild){
-          setTimeout(removeLoadedModuleName, 1000);
+        if (el.lastChild){
+          el.lastChild.style.opacity = 0;
+          setTimeout(function(){ el.removeChild(el.lastChild); }, 1000);
         }
+        setTimeout(removeLoadedModuleName, 1000);
       }
+
+      // add log entries
       var addLoadedModuleNameToDOM = function(moduleName){
         var el = document.getElementById('modulite');
         var div = document.createElement('div');
         div.innerHTML = '<span>[' + moduleName + ']</span> was loaded successfully...';
-        if(el.firstChild)
-          el.insertBefore(div, el.firstChild);
-        else
-          el.appendChild(div);
+        if (el.firstChild) el.insertBefore(div, el.firstChild);
+        else el.appendChild(div);
         el.scrollTop = el.scrollHeight;
       };
+
+      // bind logging method to the modulite onExecute event
       ml.on('execute', addLoadedModuleNameToDOM);
+
+      // configure paths for modulite
       ml.config({
         'three' : 'js/threejs/src/',
         'util'  : 'js/util/'
       });
+
+      ml.disableBrowserCaching(true);
+
+      // start removing old log entries
       setTimeout(removeLoadedModuleName, 5000);
     </script>
-		<script type="text/javascript" src="js/webgl_geometry_minecraft_ao.js"></script>
-	</head>
-	<body>
-		<div id="container"><br /><br /><br /><br />Generating world...</div>
+    <script type="text/javascript" src="js/webgl_geometry_minecraft_ao.js"></script>
+  </head>
+  <body>
+    <div id="container"><br /><br /><br /><br />Generating world...</div>
     <div id="modulite"></div>
-		<div id="info">
-			<a href="http://github.com/mrdoob/three.js" target="_blank">three.js</a> -
-			<a href="https://github.com/zfedoran/modulite.js" target="_blank">modulite.js</a> - 
-			<a href="http://www.minecraft.net/" target="_blank">minecraft</a> sample. 
-			<br/>
-			(left click: forward, right click: backward)
-		</div>
-	</body>
+    <div id="info">
+      <a href="http://github.com/mrdoob/three.js" target="_blank">three.js</a> -
+      <a href="https://github.com/zfedoran/modulite.js" target="_blank">modulite.js</a> - 
+      <a href="http://www.minecraft.net/" target="_blank">minecraft</a> sample. 
+      <br/>
+      (left click: forward, right click: backward)
+    </div>
+  </body>
 </html>
