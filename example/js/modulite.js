@@ -1,5 +1,5 @@
 /*
- * Modulite.js v0.0.5
+ * Modulite.js v0.0.6
  * http://github.com/zfedoran/modulite.js
  *
  * Modulite.js is free software: you can redistribute it and/or modify
@@ -13,7 +13,7 @@
 
   // Base modulite object
   var modulite = root.modulite = root.ml = {
-    version : '0.0.5',
+    version : '0.0.6',
   };
 
   // Base library path for modules, set this using the public function
@@ -40,22 +40,27 @@
     // A list of all executed module callbacks sorted by order of dependencies
     , _callbackStack = []
     
+    // This string will be appended to all script requests
+    , _noCaching = ''
+
     // A list of events that can be bound to using modulite.on()
     , _events = {
         'module': [], 'requires': [], 'defines': [], 'execute': []
     };
 
   // This function allows you to configure paths to smaller namespaces
-  // example:
-  //   ml.config({ 
-  //       'three' : 'public/javascripts/thirdparty/three.js/src/',
-  //       'game'  : 'public/javascripts/game/' 
-  //   });
   modulite.config = function(paths){
       _pathLibrary = paths;
     return this;
   }
 
+  // This function allows you to configure paths to smaller namespaces
+  modulite.disableBrowserCaching = function(shouldDisable){
+    if (shouldDisable) _noCaching = '?' + Math.random().toString().substr(2);
+    else _noCaching = '';
+    return this;
+  }
+  
   // This function begins a new module
   modulite.module = function(name){
     if(_currentModuleDef)
@@ -234,7 +239,7 @@
       path = path.replace(/^[^.]*\./,'');
     }
 
-    path = basePath + path.replace(/\./g, '/') + '.js';
+    path = basePath + path.replace(/\./g, '/') + '.js' + _noCaching;
     _numWaitingOnDefLoad++;
     _currentlyLoading[name] = path;
     _loadScript({ 
