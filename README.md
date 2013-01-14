@@ -22,6 +22,6 @@ Simply clone [three.js](https://github.com/mrdoob/three.js/) and run auto-moduli
 ```
 
 ## Example
-The following minecraft <a href="http://zfedoran.github.com/modulite-three.js/example/index.html">demo</a> was generated using the auto-modulite.js build script. Have a look at the <a href="https://github.com/zfedoran/modulite-three.js/blob/master/example/js/webgl_geometry_minecraft_ao.js">js</a> and <a href="https://github.com/zfedoran/modulite-three.js/blob/master/example/index.html">html</a> files. The [original](http://mrdoob.github.com/three.js/) minecraft sample can be found on the three.js repository.
+The following minecraft <a href="http://zfedoran.github.com/modulite-threejs/example/index.html">demo</a> was generated using the auto-modulite.js build script. Have a look at the <a href="https://github.com/zfedoran/modulite-three.js/blob/master/example/js/webgl_geometry_minecraft_ao.js">js</a> and <a href="https://github.com/zfedoran/modulite-three.js/blob/master/example/index.html">html</a> files. The [original](http://mrdoob.github.com/three.js/) minecraft sample can be found on the three.js repository.
 
 <a href="http://zfedoran.github.com/modulite-threejs/example/index.html"><img width="30%" src="https://github.com/zfedoran/modulite-three.js/raw/master/example/images/webgl_geometry_minecraft_ao.png"></a>
